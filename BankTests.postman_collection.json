@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "40116f6a-5f8b-4f91-b907-fe3596ec2bc9",
+		"name": "Bank payments API tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create new payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Create a new payment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.recipient).to.eql(\"Client 1\");",
+							"    pm.expect(jsonData.iban).to.eql(\"CZ1313123123214\");",
+							"    pm.expect(jsonData.amount).to.eql(100.05);",
+							"    pm.expect(jsonData.currency).to.eql(\"CZK\");",
+							"",
+							"    pm.environment.set(\"payment_id\", jsonData._id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apiKey\", \"f0085749569645f5a83864e4e2beafb5\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipient\": \"Client 1\",\n    \"iban\": \"CZ1313123123214\",\n    \"amount\": 100.05,\n    \"currency\": \"CZK\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://crudcrud.com/api/{{apiKey}}/payments",
+					"protocol": "https",
+					"host": [
+						"crudcrud",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{apiKey}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get payment by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check json response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var paymentId = pm.environment.get(\"payment_id\");",
+							"    pm.expect(jsonData._id).to.eql(paymentId);",
+							"    pm.expect(jsonData.recipient).to.eql(\"Client 1\");",
+							"    pm.expect(jsonData.iban).to.eql(\"CZ1313123123214\");",
+							"    pm.expect(jsonData.amount).to.eql(100.05);",
+							"    pm.expect(jsonData.currency).to.eql(\"CZK\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://crudcrud.com/api/{{apiKey}}/payments/{{payment_id}}",
+					"protocol": "https",
+					"host": [
+						"crudcrud",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{apiKey}}",
+						"payments",
+						"{{payment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipient\": \"Client 1\",\n    \"iban\": \"CZ1313123123214\",\n    \"amount\": 200.05,\n    \"currency\": \"EUR\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://crudcrud.com/api/{{apiKey}}/payments/{{payment_id}}",
+					"protocol": "https",
+					"host": [
+						"crudcrud",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{apiKey}}",
+						"payments",
+						"{{payment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check updated payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Updated payment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var paymentID = pm.environment.get(\"payment_id\");",
+							"",
+							"    ",
+							"    pm.expect(jsonData._id).to.eql(paymentID);",
+							"    pm.expect(jsonData.recipient).to.eql(\"Client 1\");",
+							"    pm.expect(jsonData.iban).to.eql(\"CZ1313123123214\");",
+							"    pm.expect(jsonData.amount).to.eql(200.05);",
+							"    pm.expect(jsonData.currency).to.eql(\"EUR\");",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://crudcrud.com/api/{{apiKey}}/payments/{{payment_id}}",
+					"protocol": "https",
+					"host": [
+						"crudcrud",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{apiKey}}",
+						"payments",
+						"{{payment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://crudcrud.com/api/{{apiKey}}/payments/{{payment_id}}",
+					"protocol": "https",
+					"host": [
+						"crudcrud",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{apiKey}}",
+						"payments",
+						"{{payment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check deleted payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://crudcrud.com/api/{{apiKey}}/payments/{{payment_id}}",
+					"protocol": "https",
+					"host": [
+						"crudcrud",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{apiKey}}",
+						"payments",
+						"{{payment_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
