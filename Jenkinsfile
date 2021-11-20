@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh 'newman run BankTests.postman_collection.json'
             }
         }
         stage('Deploy') {
