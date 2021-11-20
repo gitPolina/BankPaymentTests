@@ -6,13 +6,13 @@
 	},
 	"item": [
 		{
-			"name": "Create new payment",
+			"name": "New Request",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {",
+							"pm.test(\"The first test. Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
 							"});",
 							"",
@@ -33,7 +33,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"pm.environment.set(\"apiKey\", \"f0085749569645f5a83864e4e2beafb5\");"
+							"pm.environment.set(\"apiKey\", \"75609baabbe34b15a4de80167f7a528e\");"
 						],
 						"type": "text/javascript"
 					}
