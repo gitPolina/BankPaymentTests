@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '/opt/homebrew/bin/newman --version'
+                sh 'newman --version'
             }
         }
         stage('Deploy') {
