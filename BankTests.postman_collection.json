@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "40116f6a-5f8b-4f91-b907-fe3596ec2bc9",
-		"name": "BankTests.postman_collection",
+		"name": "BankTests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -33,7 +33,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"pm.environment.set(\"apiKey\", \"75609baabbe34b15a4de80167f7a528e\");"
+							"pm.environment.set(\"apiKey\", \"9cf43f38b8584a6991e0885120c1bccb\");"
 						],
 						"type": "text/javascript"
 					}
