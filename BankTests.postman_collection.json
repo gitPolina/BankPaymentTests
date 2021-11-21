@@ -20,7 +20,7 @@
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.recipient).to.eql(\"Client 1\");",
 							"    pm.expect(jsonData.iban).to.eql(\"CZ1313123123214\");",
-							"    pm.expect(jsonData.amount).to.eql(100.05);",
+							"    pm.expect(jsonData.amount).to.eql(100.15);",
 							"    pm.expect(jsonData.currency).to.eql(\"CZK\");",
 							"",
 							"    pm.environment.set(\"payment_id\", jsonData._id);",
