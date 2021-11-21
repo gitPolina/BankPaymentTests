@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '/opt/homebrew/bin/newman/newman run BankTests.postman_collection.json'
+                sh '/opt/homebrew/bin/newman run BankTests.postman_collection.json'
             }
         }
         stage('Deploy') {
