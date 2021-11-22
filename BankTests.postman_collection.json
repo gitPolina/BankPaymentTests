@@ -33,7 +33,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"pm.environment.set(\"apiKey\", \"9cf43f38b8584a6991e0885120c1bccb\");"
+							"pm.environment.set(\"apiKey\", \"86c0bcd5d45141a1a0ee0397c1f47dc1\");"
 						],
 						"type": "text/javascript"
 					}
